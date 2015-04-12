@@ -7,10 +7,7 @@ from flask import Flask, request, send_from_directory, jsonify
 
 app = Flask(__name__)
 
-www          = os.path.join(os.path.dirname(os.path.abspath(__file__)), "www")
-www_css      = os.path.join(www, "css")
-www_images   = os.path.join(www, "images")
-www_scripts  = os.path.join(www, "scripts")
+www = os.path.join(os.path.dirname(os.path.abspath(__file__)), "www")
 
 dh = DataHandler(max=20)
 
@@ -18,7 +15,7 @@ dh = DataHandler(max=20)
 # test the data APIs with curl:
 #
 #   post data:
-#     curl -d "datum=321" http://localhost:5000/api/data 
+#     curl -d "datum=321" http://localhost:5000/api/data
 #
 #   get data:
 #     curl http://localhost:5000/api/data
@@ -50,16 +47,8 @@ def api_data_get():
 def www_index(): return send_from_directory(www, 'index.html')
 
 #-------------------------------------------------------------------------------
-@app.route('/css/<path:path>', methods=['GET'])
-def www_css(path): return send_from_directory(www_css, path)
-
-#-------------------------------------------------------------------------------
-@app.route('/scripts/<path:path>', methods=['GET'])
-def www_scripts(path): return send_from_directory(www_scripts, path)
-
-#-------------------------------------------------------------------------------
-@app.route('/images/<path:path>', methods=['GET'])
-def www_images(path): return send_from_directory(www_images, path)
+@app.route('/<path:path>', methods=['GET'])
+def www_else(path): return send_from_directory(www, path)
 
 #-------------------------------------------------------------------------------
 def main():
