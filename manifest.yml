@@ -1,0 +1,6 @@
+---
+applications:
+- name:    flask-sample
+  host:    flask-sample-pjm
+  memory:  128M
+  command: python app.py
